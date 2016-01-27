@@ -17,16 +17,16 @@
 # Product-specific compile-time definitions.
 #
 
-LOCAL_PATH := device/huawei/cherry
+LOCAL_PATH := device/huawei/kiwi
 
 # Assert
-TARGET_OTA_ASSERT_DEVICE := c8817d,g620s,cherry
+# TARGET_OTA_ASSERT_DEVICE := 
 
 # Platform
 TARGET_BOARD_PLATFORM := msm8916
-TARGET_BOARD_PLATFORM_GPU := qcom-adreno306
+TARGET_BOARD_PLATFORM_GPU := qcom-adreno405
 #add suffix variable to uniquely identify the board
-TARGET_BOARD_SUFFIX := _32
+TARGET_BOARD_SUFFIX := _64
 
 # Bootloader
 TARGET_NO_BOOTLOADER := true
@@ -43,45 +43,38 @@ TARGET_ARCH_VARIANT := armv7-a-neon
 TARGET_CPU_SMP := true
 ARCH_ARM_HAVE_TLS_REGISTER := true
 
-# Init
-TARGET_INIT_VENDOR_LIB := libinit_msm
-TARGET_PLATFORM_DEVICE_BASE := /devices/soc.0/
-TARGET_LIBINIT_DEFINES_FILE := $(LOCAL_PATH)/init/init_cherry.c
-TARGET_UNIFIED_DEVICE := true
-
 # Kernel
-TARGET_CUSTOM_KERNEL_HEADERS := device/huawei/cherry/include
+TARGET_CUSTOM_KERNEL_HEADERS := device/huawei/kiwi/include
 BOARD_KERNEL_BASE        := 0x80000000
 BOARD_KERNEL_PAGESIZE    := 2048
-BOARD_KERNEL_TAGS_OFFSET := 0x01E00000
-BOARD_RAMDISK_OFFSET     := 0x02000000
-BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.console=ttyHSL0 androidboot.hardware=qcom user_debug=30 msm_rtb.filter=0x3F ehci-hcd.park=3 androidboot.bootdevice=7824900.sdhci lpm_levels.sleep_disabled=1 androidboot.selinux=permissive
+BOARD_KERNEL_TAGS_OFFSET := 0x00000100
+BOARD_RAMDISK_OFFSET     := 0x01000000
+BOARD_KERNEL_CMDLINE := androidboot.hardware=qcom msm_rtb.filter=0x237 ehci-hcd.park=3 androidboot.bootdevice=7824900.sdhci lpm_levels.sleep_disabled=1 earlyprintk androidboot.selinux=permissive
 BOARD_KERNEL_SEPARATED_DT := true
-BOARD_MKBOOTIMG_ARGS := --kernel_offset 0x00008000 --ramdisk_offset 0x02000000 --tags_offset 0x01e00000 --dt device/huawei/cherry/dt.img
-TARGET_PREBUILT_KERNEL := device/huawei/cherry/kernel
+BOARD_MKBOOTIMG_ARGS := --kernel_offset 0x00008000 --ramdisk_offset 0x01000000 --tags_offset 0x00000100 --dt device/huawei/kiwi/dt.img
+TARGET_PREBUILT_KERNEL := device/huawei/kiwi/kernel
 
 # Partitions
 BOARD_HAS_LARGE_FILESYSTEM := true
 TARGET_USERIMAGES_USE_EXT4 := true
-TARGET_USERIMAGES_USE_F2FS := true
 BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
 BOARD_PERSISTIMAGE_FILE_SYSTEM_TYPE := ext4
-BOARD_BOOTIMAGE_PARTITION_SIZE := 0x01400000 # (20M)
-BOARD_RECOVERYIMAGE_PARTITION_SIZE := 0x01900000 # (25M)
-BOARD_SYSTEMIMAGE_PARTITION_SIZE := 1288491008
-BOARD_USERDATAIMAGE_PARTITION_SIZE := 1860648960
+BOARD_BOOTIMAGE_PARTITION_SIZE := 67108864
+BOARD_RECOVERYIMAGE_PARTITION_SIZE := 67108864
+BOARD_SYSTEMIMAGE_PARTITION_SIZE := 2684354560
+BOARD_USERDATAIMAGE_PARTITION_SIZE := 11618204672
 BOARD_CACHEIMAGE_PARTITION_SIZE := 268435456
-BOARD_PERSISTIMAGE_PARTITION_SIZE := 33554432
+BOARD_PERSISTIMAGE_PARTITION_SIZE := 67108864
 BOARD_FLASH_BLOCK_SIZE := 131072 # (BOARD_KERNEL_PAGESIZE * 64)
 
 # TWRP
 RECOVERY_VARIANT := twrp
-TARGET_RECOVERY_FSTAB := $(LOCAL_PATH)/twrp/twrp.fstab
+TARGET_RECOVERY_FSTAB := $(LOCAL_PATH)/recovery/root/etc/twrp.fstab
 RECOVERY_GRAPHICS_USE_LINELENGTH := true
-DEVICE_RESOLUTION := 720x1280
+TW_THEME := portrait_hdpi
 RECOVERY_SDCARD_ON_DATA := true
 TW_TARGET_USES_QCOM_BSP := true
-TW_BOARD_CUSTOM_GRAPHICS := ../../../device/huawei/cherry/twrp/graphics.c
+TW_BOARD_CUSTOM_GRAPHICS := ../../../device/huawei/kiwi/twrp/graphics.c
 TARGET_RECOVERY_PIXEL_FORMAT := "RGBX_8888"
 TW_INCLUDE_CRYPTO := true
 TW_FLASH_FROM_STORAGE := true

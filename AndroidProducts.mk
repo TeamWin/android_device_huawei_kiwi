@@ -14,4 +14,4 @@
 # limitations under the License.
 
 PRODUCT_MAKEFILES := \
-	$(LOCAL_DIR)/cherry.mk
+	$(LOCAL_DIR)/kiwi.mk

@@ -13,9 +13,9 @@
 # limitations under the License.
 
 # Inherit from nx510j device
-$(call inherit-product, device/huawei/cherry/cherry.mk)
+$(call inherit-product, device/huawei/kiwi/kiwi.mk)
 
 # Inherit some common CM stuff.
 $(call inherit-product, vendor/cm/config/common_full_phone.mk)
 
-PRODUCT_NAME := cm_cherry
+PRODUCT_NAME := cm_kiwi
