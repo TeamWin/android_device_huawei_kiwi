@@ -16,6 +16,6 @@
 $(call inherit-product, device/huawei/kiwi/kiwi.mk)
 
 # Inherit some common CM stuff.
-$(call inherit-product, vendor/cm/config/common_full_phone.mk)
+$(call inherit-product, vendor/omni/config/common_full_phone.mk)
 
-PRODUCT_NAME := cm_kiwi
+PRODUCT_NAME := omni_kiwi
