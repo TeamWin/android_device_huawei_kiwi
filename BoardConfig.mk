@@ -25,23 +25,23 @@ LOCAL_PATH := device/huawei/kiwi
 # Platform
 TARGET_BOARD_PLATFORM := msm8916
 TARGET_BOARD_PLATFORM_GPU := qcom-adreno405
-#add suffix variable to uniquely identify the board
-TARGET_BOARD_SUFFIX := _64
 
 # Bootloader
 TARGET_NO_BOOTLOADER := true
 TARGET_BOOTLOADER_BOARD_NAME := msm8916
 
 # Architecture
-TARGET_ARCH := arm
-TARGET_GLOBAL_CFLAGS += -mfpu=neon -mfloat-abi=softfp
-TARGET_GLOBAL_CPPFLAGS += -mfpu=neon -mfloat-abi=softfp
-TARGET_CPU_ABI  := armeabi-v7a
-TARGET_CPU_ABI2 := armeabi
+TARGET_ARCH := arm64
+TARGET_ARCH_VARIANT := armv8-a
+TARGET_CPU_ABI := arm64-v8a
+TARGET_CPU_ABI2 :=
 TARGET_CPU_VARIANT := cortex-a53
-TARGET_ARCH_VARIANT := armv7-a-neon
-TARGET_CPU_SMP := true
-ARCH_ARM_HAVE_TLS_REGISTER := true
+
+TARGET_2ND_ARCH := arm
+TARGET_2ND_ARCH_VARIANT := armv7-a-neon
+TARGET_2ND_CPU_ABI := armeabi-v7a
+TARGET_2ND_CPU_ABI2 := armeabi
+TARGET_CPU_VARIANT := cortex-a53
 
 # Kernel
 TARGET_CUSTOM_KERNEL_HEADERS := device/huawei/kiwi/include
@@ -53,6 +53,9 @@ BOARD_KERNEL_CMDLINE := androidboot.hardware=qcom msm_rtb.filter=0x237 ehci-hcd.
 BOARD_KERNEL_SEPARATED_DT := true
 BOARD_MKBOOTIMG_ARGS := --kernel_offset 0x00008000 --ramdisk_offset 0x01000000 --tags_offset 0x00000100 --dt device/huawei/kiwi/recovery/dt.img
 TARGET_PREBUILT_KERNEL := device/huawei/kiwi/recovery/kernel
+TARGET_CPU_SMP := true
+TARGET_USES_64_BIT_BINDER := true
+#TARGET_USES_UNCOMPRESSED_KERNEL := true
 
 # Partitions
 BOARD_HAS_LARGE_FILESYSTEM := true
