@@ -51,8 +51,8 @@ BOARD_KERNEL_TAGS_OFFSET := 0x00000100
 BOARD_RAMDISK_OFFSET     := 0x01000000
 BOARD_KERNEL_CMDLINE := androidboot.hardware=qcom msm_rtb.filter=0x237 ehci-hcd.park=3 androidboot.bootdevice=7824900.sdhci lpm_levels.sleep_disabled=1 earlyprintk androidboot.selinux=permissive
 BOARD_KERNEL_SEPARATED_DT := true
-BOARD_MKBOOTIMG_ARGS := --kernel_offset 0x00008000 --ramdisk_offset 0x01000000 --tags_offset 0x00000100 --dt device/huawei/kiwi/dt.img
-TARGET_PREBUILT_KERNEL := device/huawei/kiwi/kernel
+BOARD_MKBOOTIMG_ARGS := --kernel_offset 0x00008000 --ramdisk_offset 0x01000000 --tags_offset 0x00000100 --dt device/huawei/kiwi/recovery/dt.img
+TARGET_PREBUILT_KERNEL := device/huawei/kiwi/recovery/kernel
 
 # Partitions
 BOARD_HAS_LARGE_FILESYSTEM := true
@@ -74,7 +74,6 @@ RECOVERY_GRAPHICS_USE_LINELENGTH := true
 TW_THEME := portrait_hdpi
 RECOVERY_SDCARD_ON_DATA := true
 TW_TARGET_USES_QCOM_BSP := true
-TW_BOARD_CUSTOM_GRAPHICS := ../../../device/huawei/kiwi/twrp/graphics.c
 TARGET_RECOVERY_PIXEL_FORMAT := "RGBX_8888"
 TW_INCLUDE_CRYPTO := true
 TW_FLASH_FROM_STORAGE := true
