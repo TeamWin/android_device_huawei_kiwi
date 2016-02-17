@@ -13,11 +13,14 @@
 # limitations under the License.
 
 ## Specify phone tech before including full_phone
+$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 $(call inherit-product, vendor/omni/config/gsm.mk)
-
-$(call inherit-product, device/huawei/kiwi/full_kiwi.mk)
 
 # Inherit some common Omni stuff.
 $(call inherit-product, vendor/omni/config/common.mk)
 
 PRODUCT_NAME := omni_kiwi
+PRODUCT_DEVICE := kiwi
+PRODUCT_BRAND := Huawei
+PRODUCT_MODEL := kiwi
+PRODUCT_MANUFACTURER := HUAWEI
