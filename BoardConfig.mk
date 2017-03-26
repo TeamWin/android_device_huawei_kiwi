@@ -1,5 +1,6 @@
 #
 # Copyright (C) 2015 The CyanogenMod Project
+# Copyright (C) 2017 The LineageOS Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,18 +20,9 @@
 
 LOCAL_PATH := device/huawei/kiwi
 
-# Assert
-# TARGET_OTA_ASSERT_DEVICE := 
-
 # Platform
 TARGET_BOARD_PLATFORM := msm8916
 TARGET_BOARD_PLATFORM_GPU := qcom-adreno405
-
-# TARGET_USE_QCOM_BIONIC_OPTIMIZATION := true
-
-# Bootloader
-TARGET_NO_BOOTLOADER := true
-TARGET_BOOTLOADER_BOARD_NAME := msm8916
 
 # Architecture
 TARGET_ARCH := arm64
@@ -45,49 +37,57 @@ TARGET_2ND_CPU_ABI := armeabi-v7a
 TARGET_2ND_CPU_ABI2 := armeabi
 TARGET_2ND_CPU_VARIANT := cortex-a7
 
-TARGET_CPU_SMP := true
-ARCH_ARM_HAVE_TLS_REGISTER := true
-
-COMMON_GLOBAL_CFLAGS += -DQCOM_HARDWARE
-COMMON_GLOBAL_CFLAGS += -DQCOM_BSP
+# Qualcomm support
+BOARD_USES_QC_TIME_SERVICES := true
+BOARD_USES_QCOM_HARDWARE := true
 
 # Kernel
-TARGET_CUSTOM_KERNEL_HEADERS := device/huawei/kiwi/include
 BOARD_KERNEL_BASE        := 0x80000000
 BOARD_KERNEL_PAGESIZE    := 2048
-BOARD_KERNEL_CMDLINE := androidboot.hardware=qcom msm_rtb.filter=0x237 ehci-hcd.park=3 androidboot.bootdevice=7824900.sdhci lpm_levels.sleep_disabled=1 earlyprintk androidboot.selinux=permissive
-BOARD_KERNEL_SEPARATED_DT := true
+BOARD_KERNEL_CMDLINE := androidboot.hardware=qcom msm_rtb.filter=0x237 ehci-hcd.park=3 androidboot.bootdevice=7824900.sdhci lpm_levels.sleep_disabled=1 earlyprintk
+#BOARD_KERNEL_SEPARATED_DT := true
+BOARD_DTBTOOL_ARGS := -2
+BOARD_KERNEL_TAGS_OFFSET := 0x01E00000
+BOARD_RAMDISK_OFFSET     := 0x02000000
 BOARD_MKBOOTIMG_ARGS := --kernel_offset 0x00008000 --ramdisk_offset 0x01000000 --tags_offset 0x00000100 --dt device/huawei/kiwi/recovery/dt.img
 TARGET_PREBUILT_KERNEL := device/huawei/kiwi/recovery/kernel
 #TARGET_USES_UNCOMPRESSED_KERNEL := true
+#TARGET_KERNEL_CONFIG := kiwi-64_defconfig
 
 # Partitions
 BOARD_HAS_LARGE_FILESYSTEM := true
 TARGET_USERIMAGES_USE_EXT4 := true
+TARGET_USERIMAGES_USE_F2FS := true
 # /proc/partitions * 2 * BLOCK_SIZE (512) = size in bytes
 BOARD_BOOTIMAGE_PARTITION_SIZE := 67108864
 BOARD_RECOVERYIMAGE_PARTITION_SIZE := 67108864
 BOARD_SYSTEMIMAGE_PARTITION_SIZE := 2684354560
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 11618204672
 # blockdev --getbsz /dev/block/mmcblk0p19
-BOARD_FLASH_BLOCK_SIZE := 4096
+BOARD_FLASH_BLOCK_SIZE := 131072
 
 # TWRP
 RECOVERY_VARIANT := twrp
+TW_EXCLUDE_SUPERSU := true
+TWRP_INCLUDE_LOGCAT := true
+TARGET_USES_LOGD := true
 TARGET_RECOVERY_FSTAB := $(LOCAL_PATH)/recovery/root/etc/twrp.fstab
 TW_THEME := portrait_hdpi
 RECOVERY_SDCARD_ON_DATA := true
 TARGET_RECOVERY_QCOM_RTC_FIX := true
 BOARD_SUPPRESS_SECURE_ERASE := true
 RECOVERY_GRAPHICS_USE_LINELENGTH := true
+TARGET_RECOVERY_PIXEL_FORMAT := RGBX_8888
+TW_DEFAULT_BRIGHTNESS := 10
 TWHAVE_SELINUX := true
-TARGET_RECOVERY_QCOM_RTC_FIX := true
 BOARD_VOLD_EMMC_SHARES_DEV_MAJOR := true
 TW_INPUT_BLACKLIST := "accelerometer"
-TW_NO_EXFAT_FUSE := true
-
-# Vold
-TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/platform/msm_hsusb/gadget/lun%d/file
-# BOARD_VOLD_DISC_HAS_MULTIPLE_MAJORS := true
-BOARD_VOLD_MAX_PARTITIONS := 65
-TARGET_PLATFORM_DEVICE_BASE := /devices/soc.0/
+TW_NO_EXFAT_FUSE := false
+TW_INCLUDE_NTFS_3G := true
+TW_INCLUDE_CRYPTO := true
+TARGET_HW_DISK_ENCRYPTION := true
+TARGET_CRYPTFS_HW_PATH := vendor/qcom/opensource/cryptfs_hw
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/recovery/libcryptfs_hw.so:system/vendor/lib64/libcryptfs_hw.so \
+    $(LOCAL_PATH)/recovery/kernel:kernel
+#   $(LOCAL_PATH)/recovery/dt.img:dt.img
