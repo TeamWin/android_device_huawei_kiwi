@@ -1,1 +1,1 @@
-add_lunch_combo omni_kiwi-userdebug
+add_lunch_combo omni_kiwi-eng

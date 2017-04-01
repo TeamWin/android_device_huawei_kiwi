@@ -2,15 +2,20 @@
 # The filesystem that contains the filesystem checker binary (typically /system) cannot
 # specify MF_CHECK, and must come before any filesystems that do specify MF_CHECK
 
-/boot         emmc   /dev/block/bootdevice/by-name/boot
-/cache        ext4   /dev/block/bootdevice/by-name/cache
-/data         ext4   /dev/block/bootdevice/by-name/userdata  length=-16384
-/recovery     emmc   /dev/block/bootdevice/by-name/recovery  flags=backup=1
-/misc         emmc   /dev/block/bootdevice/by-name/misc
-/system       ext4   /dev/block/bootdevice/by-name/system
-/cust         ext4   /dev/block/bootdevice/by-name/cust
+/boot         emmc   /dev/block/bootdevice/by-name/boot      flags=display=Boot
+/cache        auto   /dev/block/bootdevice/by-name/cache     flags=display=Cache
+/data         auto   /dev/block/bootdevice/by-name/userdata  flags=display=Data;length=-16384
+/system       ext4   /dev/block/bootdevice/by-name/system    flags=display=System
+/cust         ext4   /dev/block/bootdevice/by-name/cust      flags=backup=1;display=Custom
+/oeminfo      emmc   /dev/block/bootdevice/by-name/oeminfo   flags=backup=1;display=OEMinfo;flashimg=1
+/persist      ext4   /dev/block/bootdevice/by-name/persist   flags=backup=1;display=Persist
+/misc         emmc   /dev/block/bootdevice/by-name/misc	     flags=backup=1;display=Misc
+/recovery     emmc   /dev/block/bootdevice/by-name/recovery  flags=backup=1;display=Recovery
+/erecovery    emmc   /dev/block/bootdevice/by-name/erecovery flags=backup=1;display=eRecovery
 /efs1         emmc   /dev/block/bootdevice/by-name/modemst1  flags=backup=1;display=EFS
 /efs2         emmc   /dev/block/bootdevice/by-name/modemst2  flags=backup=1;subpartitionof=/efs1
- 
-/external_sd  vfat   /dev/block/mmcblk1p1 /dev/block/mmcblk1  flags=display="Micro SDcard";storage;wipeingui;removable
-/usb-otg      vfat   /dev/block/sda1      /dev/block/sda  flags=removable;storage;display=USB-OTG
+/firmware     vfat   /dev/block/bootdevice/by-name/modem     flags=backup=1;display=Firmware;mounttodecrypt
+
+/external_sd  vfat   /dev/block/mmcblk1p1 /dev/block/mmcblk1 flags=display="Micro SDcard";storage;wipeingui;removable;andsec
+/sd-ext       ext4   /dev/block/mmcblk1p2                    flags=display="Adopted storage, use with Micro SDcard and data";wipeingui;removable
+/usb-otg      auto   /dev/block/sda1      /dev/block/sda     flags=removable;storage;display=USB-OTG
