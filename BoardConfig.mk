@@ -19,9 +19,6 @@
 
 LOCAL_PATH := device/huawei/kiwi
 
-# Assert
-# TARGET_OTA_ASSERT_DEVICE := 
-
 # Platform
 TARGET_BOARD_PLATFORM := msm8916
 TARGET_BOARD_PLATFORM_GPU := qcom-adreno405
@@ -41,7 +38,7 @@ TARGET_2ND_ARCH := arm
 TARGET_2ND_ARCH_VARIANT := armv7-a-neon
 TARGET_2ND_CPU_ABI := armeabi-v7a
 TARGET_2ND_CPU_ABI2 := armeabi
-TARGET_2ND_CPU_VARIANT := cortex-a7
+TARGET_2ND_CPU_VARIANT := cortex-a53
 
 # Qualcomm support
 BOARD_USES_QC_TIME_SERVICES := true
@@ -49,13 +46,18 @@ BOARD_USES_QCOM_HARDWARE := true
 
 # Kernel
 BOARD_KERNEL_BASE        := 0x80000000
-BOARD_KERNEL_PAGESIZE    := 2048
 BOARD_KERNEL_CMDLINE := androidboot.hardware=qcom msm_rtb.filter=0x237 ehci-hcd.park=3 androidboot.bootdevice=7824900.sdhci lpm_levels.sleep_disabled=1 earlyprintk
-#BOARD_KERNEL_SEPARATED_DT := true
-BOARD_MKBOOTIMG_ARGS := --kernel_offset 0x00008000 --ramdisk_offset 0x02000000 --tags_offset 0x01E00000 --dt $(LOCAL_PATH)/recovery/dt.img
-TARGET_PREBUILT_KERNEL := $(LOCAL_PATH)/recovery/kernel
-#TARGET_USES_UNCOMPRESSED_KERNEL := true
-#TARGET_KERNEL_CONFIG := kiwi-64_defconfig
+BOARD_KERNEL_PAGESIZE    := 2048
+BOARD_KERNEL_SEPARATED_DT := true
+BOARD_DTBTOOL_ARGS := -2
+BOARD_KERNEL_TAGS_OFFSET := 0x01E00000
+BOARD_RAMDISK_OFFSET     := 0x02000000
+TARGET_KERNEL_SOURCE := kernel/huawei/kiwi
+TARGET_KERNEL_ARCH := arm64
+TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-linux-android-
+TARGET_KERNEL_HEADER_ARCH := arm64
+TARGET_USES_UNCOMPRESSED_KERNEL := true
+TARGET_KERNEL_CONFIG := kiwi-64_defconfig
 
 # Partitions
 TARGET_USERIMAGES_USE_EXT4 := true
@@ -71,8 +73,6 @@ BOARD_FLASH_BLOCK_SIZE := 131072
 # TWRP
 RECOVERY_VARIANT := twrp
 TW_EXCLUDE_SUPERSU := true
-TWRP_INCLUDE_LOGCAT := true
-TARGET_USES_LOGD := true
 TARGET_RECOVERY_FSTAB := $(LOCAL_PATH)/recovery/root/etc/twrp.fstab
 TW_THEME := portrait_hdpi
 RECOVERY_SDCARD_ON_DATA := true
@@ -85,13 +85,11 @@ TWHAVE_SELINUX := true
 TARGET_RECOVERY_QCOM_RTC_FIX := true
 BOARD_VOLD_EMMC_SHARES_DEV_MAJOR := true
 TW_INPUT_BLACKLIST := "accelerometer"
-TW_NO_EXFAT_FUSE := false
+TW_NO_EXFAT_FUSE := true
 TW_INCLUDE_NTFS_3G := true
 TW_INCLUDE_CRYPTO := true
 TARGET_HW_DISK_ENCRYPTION := true
-TARGET_CRYPTFS_HW_PATH := vendor/qcom/opensource/cryptfs_hw
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/recovery/libcryptfs_hw.so:system/vendor/lib64/libcryptfs_hw.so
-#    $(LOCAL_PATH)/recovery/kernel:kernel \
-#    $(LOCAL_PATH)/recovery/dt.img:dt.img
+
+# Vold
+TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/platform/msm_hsusb/gadget/lun%d/file
 
