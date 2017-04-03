@@ -26,7 +26,7 @@ Add to `.repo/local_manifests/kiwi.xml`:
     <!-- kernel -->
     <!--<project name="LineageOS/android_kernel_huawei_kiwi" path="kernel/huawei/kiwi" remote="github" revision="cm-14.1" />-->
     <!-- cryptfs_hw -->
-    <project name="LineageOS/android_vendor_qcom_opensource_cryptfs_hw" path="vendor/qcom/opensource/cryptfs_hw" remote="github" revision="cm-14.1" />
+    <!--<project name="LineageOS/android_vendor_qcom_opensource_cryptfs_hw" path="vendor/qcom/opensource/cryptfs_hw" remote="github" revision="cm-14.1" />-->
 </manifest>
 ```
 

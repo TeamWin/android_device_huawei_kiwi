@@ -41,7 +41,7 @@ TARGET_2ND_ARCH := arm
 TARGET_2ND_ARCH_VARIANT := armv7-a-neon
 TARGET_2ND_CPU_ABI := armeabi-v7a
 TARGET_2ND_CPU_ABI2 := armeabi
-TARGET_2ND_CPU_VARIANT := cortex-a7
+TARGET_2ND_CPU_VARIANT := cortex-a53
 
 # Qualcomm support
 BOARD_USES_QC_TIME_SERVICES := true
@@ -71,8 +71,6 @@ BOARD_FLASH_BLOCK_SIZE := 131072
 # TWRP
 RECOVERY_VARIANT := twrp
 TW_EXCLUDE_SUPERSU := true
-TWRP_INCLUDE_LOGCAT := true
-TARGET_USES_LOGD := true
 TARGET_RECOVERY_FSTAB := $(LOCAL_PATH)/recovery/root/etc/twrp.fstab
 TW_THEME := portrait_hdpi
 RECOVERY_SDCARD_ON_DATA := true
@@ -85,7 +83,7 @@ TWHAVE_SELINUX := true
 TARGET_RECOVERY_QCOM_RTC_FIX := true
 BOARD_VOLD_EMMC_SHARES_DEV_MAJOR := true
 TW_INPUT_BLACKLIST := "accelerometer"
-TW_NO_EXFAT_FUSE := false
+TW_NO_EXFAT_FUSE := true
 TW_INCLUDE_NTFS_3G := true
 TW_INCLUDE_CRYPTO := true
 TARGET_HW_DISK_ENCRYPTION := true
@@ -94,4 +92,7 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/recovery/libcryptfs_hw.so:system/vendor/lib64/libcryptfs_hw.so
 #    $(LOCAL_PATH)/recovery/kernel:kernel \
 #    $(LOCAL_PATH)/recovery/dt.img:dt.img
+
+# Vold
+TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/platform/msm_hsusb/gadget/lun%d/file
 

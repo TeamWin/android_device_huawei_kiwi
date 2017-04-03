@@ -1,3 +1,8 @@
 [
-
+   {
+       "remote": "github",
+       "repository": "LineageOS/android_vendor_qcom_opensource_cryptfs_hw",
+       "target_path": "vendor/qcom/opensource/cryptfs_hw",
+       "revision": "cm-14.1"
+   }
 ]
