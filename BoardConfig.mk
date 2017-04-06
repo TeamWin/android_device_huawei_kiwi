@@ -90,9 +90,3 @@ TW_NO_EXFAT_FUSE := false
 TW_INCLUDE_NTFS_3G := true
 TW_INCLUDE_CRYPTO := true
 TARGET_HW_DISK_ENCRYPTION := true
-TARGET_CRYPTFS_HW_PATH := vendor/qcom/opensource/cryptfs_hw
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/recovery/libcryptfs_hw.so:system/vendor/lib64/libcryptfs_hw.so
-#    $(LOCAL_PATH)/recovery/kernel:kernel \
-#    $(LOCAL_PATH)/recovery/dt.img:dt.img
-
