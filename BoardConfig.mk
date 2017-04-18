@@ -52,7 +52,6 @@ BOARD_USES_QCOM_HARDWARE := true
 BOARD_KERNEL_BASE        := 0x80000000
 BOARD_KERNEL_PAGESIZE    := 2048
 BOARD_KERNEL_CMDLINE := androidboot.hardware=qcom msm_rtb.filter=0x237 ehci-hcd.park=3 androidboot.bootdevice=7824900.sdhci lpm_levels.sleep_disabled=1 earlyprintk
-#BOARD_KERNEL_SEPARATED_DT := true
 BOARD_MKBOOTIMG_ARGS := --kernel_offset 0x00008000 --ramdisk_offset 0x02000000 --tags_offset 0x01E00000 --dt $(LOCAL_PATH)/recovery/dt.img
 TARGET_PREBUILT_KERNEL := $(LOCAL_PATH)/recovery/kernel
 #TARGET_USES_UNCOMPRESSED_KERNEL := true
