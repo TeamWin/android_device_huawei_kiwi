@@ -52,11 +52,8 @@ BOARD_USES_QCOM_HARDWARE := true
 BOARD_KERNEL_BASE        := 0x80000000
 BOARD_KERNEL_PAGESIZE    := 2048
 BOARD_KERNEL_CMDLINE := androidboot.hardware=qcom msm_rtb.filter=0x237 ehci-hcd.park=3 androidboot.bootdevice=7824900.sdhci lpm_levels.sleep_disabled=1 earlyprintk
-#BOARD_KERNEL_SEPARATED_DT := true
 BOARD_MKBOOTIMG_ARGS := --kernel_offset 0x00008000 --ramdisk_offset 0x02000000 --tags_offset 0x01E00000 --dt $(LOCAL_PATH)/recovery/dt.img
 TARGET_PREBUILT_KERNEL := $(LOCAL_PATH)/recovery/kernel
-#TARGET_USES_UNCOMPRESSED_KERNEL := true
-#TARGET_KERNEL_CONFIG := kiwi-64_defconfig
 
 # Partitions
 TARGET_USERIMAGES_USE_EXT4 := true
@@ -69,7 +66,7 @@ BOARD_USERDATAIMAGE_PARTITION_SIZE := 11618204672
 # blockdev --getbsz /dev/block/mmcblk0p19
 BOARD_FLASH_BLOCK_SIZE := 131072
 
-# TWRP
+# TWRP Recovery
 RECOVERY_VARIANT := twrp
 TW_EXCLUDE_SUPERSU := true
 #TWRP_INCLUDE_LOGCAT := true
@@ -85,7 +82,11 @@ TWHAVE_SELINUX := true
 TARGET_RECOVERY_QCOM_RTC_FIX := true
 BOARD_VOLD_EMMC_SHARES_DEV_MAJOR := true
 TW_INPUT_BLACKLIST := "accelerometer"
-TW_NO_EXFAT_FUSE := false
+TW_NO_EXFAT_FUSE := true
 TW_INCLUDE_NTFS_3G := true
 TW_INCLUDE_CRYPTO := true
 TARGET_HW_DISK_ENCRYPTION := true
+
+# Vold
+TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/platform/msm_hsusb/gadget/lun%d/file
+
