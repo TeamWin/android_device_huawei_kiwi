@@ -12,4 +12,12 @@ service qseecomd /sbin/qseecomd
     seclabel u:r:recovery:s0
 
 on property:ro.crypto.state=encrypted
+    start sbinqseecomd
+    
+# symlink
+wait /dev/block/platform/soc/7824900.sdhci
+symlink /dev/block/platform/soc/7824900.sdhci /dev/block/bootdevice
+
+    
+on property:ro.crypto.state=encrypted
     start qseecomd
